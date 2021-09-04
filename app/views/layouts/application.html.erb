@@ -1,3 +1,5 @@
+<script src="https://kit.fontawesome.com/aa99b759fb.js" crossorigin="anonymous"></script>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,9 +9,70 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+    <span><%= link_to "Bookers", root_path %></span>
+    <% if user_signed_in? %>
+
+      <nav class= "navbar navbar-expand-lg navbar-light">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+
+     <li>
+      <i class="fas fa-home"></i>
+      <%= link_to "Home", user_path(current_user) %>
+     </li>
+     <li>
+       <i class="fas fa-users"></i>
+       <%= link_to "Users", users_path %>
+     </li>
+     <li>
+       <i class="fas fa-book-open"></i>
+       <%= link_to "Books", books_path %>
+     </li>
+     <li>
+       <i class="fas fa-sign-out-alt"></i>
+       <%= link_to "logout", destroy_user_session_path,method: :delete %>
+     </li>
+     <% else %>
+
+     <li>
+       <i class="fas fa-home"></i>
+       <%= link_to "Home", root_path %>
+     </li>
+     <li>
+       <i class="fas fa-link"></i>
+       <%= link_to "About", home_about_path %>
+     </li>
+     <li>
+       <i class="fas fa-user-plus"></i>
+       <%= link_to "sign up", new_user_registration_path %>
+     </li>
+     <li>
+       <i class="fas fa-sign-in-alt"></i>
+       <%= link_to "login", new_user_session_path %>
+     </li>
+
+     <% end %>
+           </ul>
+          </dl>
+      </nav>
+     </header>
+
+     <%= render 'layouts/notification' %>
+   <%= yield %>
+
+     <footer>
+       <p>CopyRight Infratop.inc</p>
+     </footer>
+
   </body>
 </html>
